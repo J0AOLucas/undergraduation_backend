@@ -11,6 +11,8 @@ var universitiesRouter = require('./routes/universities');
 var applicationsRouter = require('./routes/applications');
 var documentsRouter = require('./routes/documents');
 var interactionsRouter = require('./routes/interactions');
+var communicationsRouter = require('./routes/communications');
+var internalNotesRouter = require('./routes/internal_notes');
 var app = express();
 
 // view engine setup
@@ -30,6 +32,8 @@ app.use('/api/universities', universitiesRouter);
 app.use('/api/applications', applicationsRouter);
 app.use('/api/documents', documentsRouter);
 app.use('/api/interactions', interactionsRouter);
+app.use('/api/communications', communicationsRouter);
+app.use('/api/internal_notes', internalNotesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
