@@ -13,6 +13,8 @@ var documentsRouter = require('./routes/documents');
 var interactionsRouter = require('./routes/interactions');
 var communicationsRouter = require('./routes/communications');
 var internalNotesRouter = require('./routes/internal_notes');
+var authRoutesRouter = require('./routes/auth_routes');
+var authMiddleware = require('./src/middlewares/AuthMiddleware');
 var app = express();
 
 // view engine setup
@@ -25,8 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/auth', authRoutesRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// API routes (authentication applied in individual route files)
 app.use('/api/students', studentsRouter);
 app.use('/api/universities', universitiesRouter);
 app.use('/api/applications', applicationsRouter);

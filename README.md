@@ -41,7 +41,30 @@ npm start
 
 The server will be available at `http://localhost:3001`
 
+## Authentication
+
+All API endpoints require authentication. First, login to get a token:
+
+```bash
+curl -X POST http://localhost:3001/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@example.com",
+    "password": "your-password"
+  }'
+```
+
+Use the returned `idToken` in the Authorization header for all API requests:
+
+```bash
+curl -H "Authorization: Bearer YOUR_ID_TOKEN" \
+  http://localhost:3001/api/students
+```
+
 ## Endpoints
+
+### Authentication
+- `POST /auth/login` - Login user
 
 ### Students
 - `GET /api/students` - List students
