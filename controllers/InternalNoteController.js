@@ -12,7 +12,15 @@ const InternalNoteSchema = z.object({
 module.exports = {
   list: async (req, res) => {
     try {
-      const snap = await db.collection('internal_notes').get();
+      const { student_id } = req.query;
+      let query = db.collection('internal_notes');
+      
+      // Filter by student_id if provided
+      if (student_id) {
+        query = query.where('student_id', '==', student_id);
+      }
+      
+      const snap = await query.get();
       const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       res.json(items);
     } catch (e) {
