@@ -3,7 +3,12 @@ const { db } = require('../firebase');
 module.exports = {
   list: async (req, res) => {
     try {
-      const snap = await db.collection('applications').get();
+      const { student_id } = req.query;
+      let q = db.collection('applications');
+      if (student_id) {
+        q = q.where('student_id', '==', student_id);
+      }
+      const snap = await q.get();
       const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       res.json(items);
     } catch (e) {
