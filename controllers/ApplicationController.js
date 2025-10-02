@@ -12,9 +12,13 @@ module.exports = {
   },
   get: async (req, res) => {
     try {
-      const doc = await db.collection('applications').doc(req.params.id).get();
-      if (!doc.exists) return res.status(404).json({ error: 'Not found' });
-      res.json({ id: doc.id, ...doc.data() });
+      const docs = await db.collection('applications')
+      .where('student_id', '==', req.params.id)
+      .limit(1)
+      .get();
+      if (docs.empty) return res.status(404).json({ error: 'Not found' });
+      const doc = docs.docs[0];
+      res.json({ id: doc.application_id, ...doc.data() });
     } catch (e) {
       res.status(400).json({ error: e.message });
     }
