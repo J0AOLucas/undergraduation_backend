@@ -16,6 +16,7 @@ var internalNotesRouter = require('./routes/internal_notes');
 var authRoutesRouter = require('./routes/auth_routes');
 var authMiddleware = require('./src/middlewares/AuthMiddleware');
 var adminRoutesRouter = require('./routes/admin_routes');
+var remindersRouter = require('./routes/reminders');
 var app = express();
 
 // view engine setup
@@ -41,6 +42,8 @@ app.use('/api/interactions', interactionsRouter);
 app.use('/api/communications', communicationsRouter);
 app.use('/api/internal_notes', internalNotesRouter);
 app.use('/api/admins', adminRoutesRouter);
+app.use('/api/reminders', remindersRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
