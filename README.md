@@ -14,7 +14,7 @@ Backend API for CRM system with Firebase Firestore integration.
 
 - Node.js (version 14 or higher)
 - Firebase credentials file (key.json)
-- .env file with all credentials
+- .env file with all credentials in the root
 
 ## Installation
 
